@@ -32,8 +32,9 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
-// This is how the new note gets created and stored in db.json
+// This is how the new note gets created and stored in db.json (body is the request, notesArray is the response)
 function createNewNote(body, notesArray) {
+    // Assigns the body request to newNote
     const newNote = body;
     if (!Array.isArray(notesArray))
         notesArray = [];
