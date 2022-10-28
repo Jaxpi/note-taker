@@ -11,25 +11,25 @@ const PORT = process.env.PORT || 3001;
 const allNotes = require('./Develop/db/db.json');
 
 // These are middleware to take entering requests and check to see if url matches file in public folder (where all your static files "live") - this goes above any routes
-app.use(express.static('public'));
+app.use(express.static('Develop/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// These functions instruct that when a clinet requests -api/notes to respond with the allNotes in position 1 of the array, -the homepage or any other request (not homepage, api/notes, or /notes) (indicated by the *) to respond with the index.html file, -/notes to respond with the notes.html file
+// These functions instruct that when a client requests -api/notes to respond with the allNotes in position 1 of the array, -the homepage or any other request (not homepage, api/notes, or /notes) (indicated by the *) to respond with the index.html file, -/notes to respond with the notes.html file
 app.get('/api/notes', (req, res) => {
     res.json(allNotes.slice(1));
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
+    res.sendFile(path.join(__dirname, './Develop/public/index.html'));
 });
 
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/notes.html'));
+    res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
 });
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
+    res.sendFile(path.join(__dirname, './Develop/public/index.html'));
 });
 
 // This is how the new note gets created and stored in db.json (body is the request, notesArray is the response)
@@ -47,7 +47,7 @@ function createNewNote(body, notesArray) {
 
     notesArray.push(newNote);
     fs.writeFileSync(
-        path.join(__dirname, './db/db.json'),
+        path.join(__dirname, './Develop/db/db.json'),
         JSON.stringify(notesArray, null, 2)
     );
     return newNote;
@@ -67,7 +67,7 @@ function deleteNote(id, notesArray) {
         if (note.id == id) {
             notesArray.splice(i, 1);
             fs.writeFileSync(
-                path.join(__dirname, './db/db.json'),
+                path.join(__dirname, './Develop/db/db.json'),
                 JSON.stringify(notesArray, null, 2)
             );
 
