@@ -15,7 +15,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// These functions instruct where to get the requested data from and where to send the responses - index.html for the intial homepage and notes.html for the note creator and stored list of notes - the * is so if something other than those options is input it goes to index.html
+// These functions instruct that when a clinet requests -api/notes to respond with the allNotes in position 1 of the array, -the homepage or any other request (not homepage, api/notes, or /notes) (indicated by the *) to respond with the index.html file, -/notes to respond with the notes.html file
 app.get('/api/notes', (req, res) => {
     res.json(allNotes.slice(1));
 });
