@@ -7,7 +7,7 @@ const fs = require("fs");
 const app = express();
 
 // This delcares the port for the server - every server opens a "socket" on a port, and only one can run on a aport at a time
-const PORT = 3001;
+const PORT = process.env.port || 3001;
 const allNotes = require('./db/db.json');
 
 // These are middleware to take entering requests and check to see if url matches file in public folder (where all your static files "live") - this goes above any routes
